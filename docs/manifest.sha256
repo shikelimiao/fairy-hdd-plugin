@@ -1,0 +1,8 @@
+a299e67c740298af212a2519ced427da973360e45949ef65a2e9627a1ab20e9d  Fairy-e10.ckpt  GPT 权重  155312502 bytes
+6b60de808ab01e9e68338cca7313f749f0bdc4da2fa2a0cbb69861b8dedc4b67  Fairy_e10_s870.pth  SoVITS 权重  85006074 bytes
+5b3ac15615362f1ead2181207264a925463639e95602ebab9a94196c017e6814  fairy_ref.wav  参考音  540024 bytes
+e71f02419a3cff0ed19337a9675ce4ca7c47b1b41a524a03db5799f647a17d07  splash.mp4  开屏动画  74331111 bytes
+6db1aedf4b9390d13fe6e280d61e5d009587a5c851a60a0e36232dbeb5bd294e  client.js  皮肤客户端（CSS+开屏+全部组件）  49866 bytes
+6ab9da1a6e4798ddfafd7583aa0a131763212da1b0289b42cbf19836ce8b8108  skin-index.js  皮肤宿主端（拉起 9880/9890）  3407 bytes
+4fa6126727dc638659ae4adaa278e315c36f15bfa6f97fb4a8b0a864a256dcc0  preset.patch.yml  Fairy 预设（33 行）  17109 bytes
+e2f5baddbfef54d1f6c2c943ed12bc9593a9eb00933de85e870f591a3b70d429  voice-plugin-client.js  语音插件客户端（常驻）  6138 bytes

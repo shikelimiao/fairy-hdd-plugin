@@ -1,0 +1,7 @@
+{
+  "name": "@local/dsh-fairy-preset",
+  "version": "2.0.1",
+  "private": true,
+  "type": "module",
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

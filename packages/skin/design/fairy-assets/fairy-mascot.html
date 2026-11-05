@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="zh-CN" data-hdd-boot-active="false">
+<head>
+<meta charset="utf-8">
+<title>FAIRY Ⅲ · 动态徽记（独立版）</title>
+<style>
+:root {
+  --hdd-ink: #07101c;
+  --hdd-line: rgba(126, 220, 255, 0.28);
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(120% 90% at 50% 35%, #0d2136 0%, #07101c 55%, #04090f 100%);
+  color: #dcecf8;
+  font: 13px/1.6 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+}
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 40px 16px;
+  box-sizing: border-box;
+}
+.stage-wrap { display: grid; gap: 28px; justify-items: center; }
+.sizes { display: flex; align-items: flex-end; gap: 40px; }
+.size-card { display: grid; justify-items: center; gap: 10px; }
+.size-label { color: rgba(220, 236, 248, 0.55); letter-spacing: 0.08em; font-size: 11px; }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+button {
+  background: linear-gradient(180deg, #2c2c30, #191919);
+  color: #dcecf8;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font: inherit;
+}
+button:hover { border-color: rgba(126, 220, 255, 0.5); }
+.note { max-width: 640px; color: rgba(220, 236, 248, 0.62); text-align: center; }
+code { color: #9fd8ff; }
+/* ---- the mascot rules, copied verbatim from the skin ---- */
+[data-hdd-mascot] {   flex: 1 1 100%; display: flex; justify-content: center; align-items: center;   position: relative; padding: 12px 0 26px; box-sizing: border-box;   overflow: visible !important;   transition: opacity 0.25s ease-out; }
+html[data-hdd-boot-active="true"] [data-hdd-mascot] {   opacity: 0 !important; }
+[data-hdd-mascot-stage] {   position: relative; flex: 0 0 auto !important;   width: min(260px, 100%); aspect-ratio: 1 / 1; height: auto;   max-width: 260px; }
+[data-hdd-mascot-bloom] {   position: absolute; inset: -14%; border-radius: 50%;   corner-shape: round;   background: radial-gradient(circle closest-side, rgba(150, 200, 255, 0.34) 0%, rgba(80, 150, 255, 0.22) 32%, rgba(56, 116, 255, 0.09) 55%, rgba(0, 0, 0, 0) 74%);   animation: hdd-mascot-bloom 3s ease-in-out infinite; }
+[data-hdd-mascot-stage]::before {   corner-shape: round;   border: 5px solid rgba(236, 246, 255, 0.7);   box-shadow: 0 0 16px rgba(198, 230, 255, 0.55), inset 0 0 14px rgba(198, 230, 255, 0.4);   filter: blur(3px);   opacity: 0;   animation: hdd-mascot-ripple 3.4s ease-out infinite; }
+[data-hdd-mascot-mark] { position: absolute; inset: 11%; }
+[data-hdd-mascot-band] {   position: absolute; inset: 0;   animation: hdd-mascot-slice 3.6s steps(1, end) infinite;   will-change: transform; }
+[data-hdd-mascot-band] svg { width: 100%; height: 100%; display: block; }
+@keyframes hdd-mascot-bloom {   0%, 100% { opacity: 0.7; transform: scale(1); }   50% { opacity: 1; transform: scale(1.06); } }
+@keyframes hdd-mascot-ripple {   0% { transform: scale(1.08); opacity: 0; }   18% { opacity: 0.9; }   66% { opacity: 0.3; }   100% { transform: scale(1.42); opacity: 0; } }
+@keyframes hdd-mascot-slice {   0%, 96% { transform: translateX(0); filter: none; }   96.2% { transform: translateX(var(--hdd-shift, 0px)); filter: brightness(1.35) saturate(1.35); }   97.4% { transform: translateX(calc(var(--hdd-shift, 0px) * -0.35)); filter: brightness(1.12); }   98.4%, 100% { transform: translateX(0); filter: none; } }
+[data-hdd-mark-scope] #hddFairyCorners {   transform-box: view-box; transform-origin: 80px 80px;   animation: hdd-mascot-turn 3s linear infinite; }
+[data-hdd-mark-scope] #hddFairySclera { animation-name: hdd-mascot-sclera; }
+[data-hdd-mark-scope] #hddFairyIrisOuter { animation-name: hdd-mascot-iris-outer; animation-delay: -47ms; }
+[data-hdd-mark-scope] #hddFairyIrisBlue { animation-name: hdd-mascot-iris-blue; animation-delay: -94ms; }
+[data-hdd-mark-scope] #hddFairyHighlight { animation-name: hdd-mascot-iris-blue; animation-delay: -94ms; }
+[data-hdd-mark-scope] #hddFairyPupil { animation-name: hdd-mascot-pupil; animation-delay: -188ms; }
+@keyframes hdd-mascot-turn { from { transform: rotate(0deg); } to { transform: rotate(90deg); } }
+@keyframes hdd-mascot-sclera { 0%, 100% { transform: scale(0.985); } 50% { transform: scale(0.91); } }
+@keyframes hdd-mascot-iris-outer { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.90); } }
+@keyframes hdd-mascot-iris-blue { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.87); } }
+@keyframes hdd-mascot-pupil { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.85); } }
+[data-hdd-mascot][data-rail="true"] [data-hdd-mascot-stage] {   width: min(112px, 100%); aspect-ratio: 1 / 1; height: auto; }
+[data-hdd-boot-bloom] {   position: absolute; inset: -14%; border-radius: 50%;   corner-shape: round;   background: radial-gradient(circle closest-side, rgba(150, 200, 255, 0.34) 0%, rgba(80, 150, 255, 0.22) 32%, rgba(56, 116, 255, 0.09) 55%, rgba(0, 0, 0, 0) 74%);   animation: hdd-mascot-bloom 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {   [data-hdd-mascot] [data-hdd-mascot-bloom],   [data-hdd-mascot] [data-hdd-mascot-stage]::before,   [data-hdd-mascot] [data-hdd-mascot-band],   [data-hdd-mark-scope] #hddFairyCorners { animation: none; }   [data-hdd-mark-scope] #hddFairySclera, [data-hdd-mark-scope] #hddFairyIrisOuter,   [data-hdd-mark-scope] #hddFairyIrisBlue, [data-hdd-mark-scope] #hddFairyPupil,   [data-hdd-mark-scope] #hddFairyHighlight { animation: none; } }
+/* ---- demo-only: let the stage size follow the wrapper ---- */
+.demo-slot [data-hdd-mascot] { width: 100% !important; }
+.demo-slot [data-hdd-mascot-stage] { width: 100% !important; }
+/* ---- demo-only: an escape hatch for systems that ask for reduced motion ----
+   The skin honours prefers-reduced-motion by stopping every mascot animation, which
+   on Windows follows the "show animations" accessibility switch. A demo that cannot
+   show the animation is useless, so this page detects that setting, says so, and can
+   force the animations back on with one click. */
+html.force-motion [data-hdd-mascot-band] { animation: hdd-mascot-slice 3.6s steps(1, end) infinite !important; }
+html.force-motion [data-hdd-mascot-stage]::before { animation: hdd-mascot-ripple 3.4s ease-out infinite !important; }
+html.force-motion [data-hdd-mascot-bloom] { animation: hdd-mascot-bloom 3s ease-in-out infinite !important; }
+html.force-motion [data-hdd-mark-scope] #hddFairyCorners { animation: hdd-mascot-turn 3s linear infinite !important; }
+html.force-motion [data-hdd-mark-scope] #hddFairySclera,
+html.force-motion [data-hdd-mark-scope] #hddFairyIrisOuter,
+html.force-motion [data-hdd-mark-scope] #hddFairyIrisBlue,
+html.force-motion [data-hdd-mark-scope] #hddFairyPupil { animation: hdd-mascot-bloom 3s ease-in-out infinite !important; }
+html.force-motion [data-hdd-mark-scope] #hddFairyHighlight { animation: hdd-mascot-bloom 3s ease-in-out infinite !important; }
+#motion-hint {
+  display: none;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 190, 90, 0.35);
+  background: rgba(255, 190, 90, 0.08);
+  color: #ffd79a;
+  text-align: center;
+}
+#motion-hint.on { display: block; }
+#diagnostics {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(126, 220, 255, 0.22);
+  background: rgba(9, 22, 36, 0.7);
+  color: rgba(220, 236, 248, 0.72);
+  font: 12px/1.7 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+}
+.stamp { color: rgba(220, 236, 248, 0.38); font-size: 11px; text-align: center; }
+/* Demo-only pacing controls. The tear lasts about 86ms out of every 3.6s in the skin,
+   which is easy to miss while watching; these two make it examinable. */
+html.slow-demo [data-hdd-mascot-band] { animation-duration: 14.4s !important; }
+html.flicker-demo [data-hdd-mascot-band] { animation-duration: 1.1s !important; }
+/* The JS driver owns the transforms when it is on, so the CSS animations must not
+   compete with it (a running animation beats an inline style). */
+html.js-driver [data-hdd-mascot-band] { animation: none !important; }
+/* ::before cannot be touched from JavaScript, so the driver publishes the ring's scale
+   and opacity as custom properties and these rules read them. */
+html.js-driver [data-hdd-mascot-stage]::before {
+  animation: none !important;
+  transform: scale(var(--demo-ring-scale, 1.08));
+  opacity: var(--demo-ring-opacity, 0.5);
+}
+html.js-driver [data-hdd-mascot-bloom] { animation: none !important; opacity: 0.75; }
+</style>
+</head>
+<body>
+<div class="stage-wrap">
+  <div class="sizes">
+    <div class="size-card">
+      <div class="demo-slot" style="width:260px"><div id="big"></div></div>
+      <div class="size-label">260 px（侧栏底部尺寸）</div>
+    </div>
+    <div class="size-card">
+      <div class="demo-slot" style="width:112px"><div id="small"></div></div>
+      <div class="size-label">112 px（侧栏收起尺寸）</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="shatter">触发一次故障</button>
+    <button id="ring">切换光环</button>
+    <button id="slow">慢放（撕裂更易看）</button>
+    <button id="flicker">连续撕裂</button>
+    <button id="motion">跟随系统动画设置</button>
+  </div>
+  <p id="motion-hint">
+    这个系统把「动画效果」关掉了（<code>prefers-reduced-motion: reduce</code>）。
+    本页已**强制播放**动画；点上面的按钮可切回跟随系统。
+  </p>
+  <pre id="diagnostics"></pre>
+  <p class="stamp">构建 2026-10-23T08:28:54.568Z · 内联矢量 3038 字符 · 规则 25 条 · 横带 20</p>
+  <p class="note">
+    纯矢量：一个 SVG 画 20 遍，每遍用 <code>clip-path: inset()</code> 只露一条横带；
+    每 3.6 秒所有带子在同一帧各自横向错位（<code>--hdd-shift</code>），所以看起来是「一次撕裂」而不是波浪。
+    光环是 <code>::before</code> 上的 <code>border</code> + <code>blur</code>，所以一定得配
+    <code>corner-shape: round</code>，否则会变成圆角方形。
+  </p>
+</div>
+
+<script type="application/json" id="vector">"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-1 -1 162 162\" role=\"img\" aria-label=\"Fairy\"><defs><linearGradient id=\"hddFairyOuter\" x1=\".2\" y1=\"0\" x2=\".8\" y2=\"1\"><stop stop-color=\"#4053f0\"/><stop offset=\".54\" stop-color=\"#3045dc\"/><stop offset=\"1\" stop-color=\"#3d50c8\"/></linearGradient><radialGradient id=\"hddFairyScleraHalo\" gradientUnits=\"userSpaceOnUse\" cx=\"80\" cy=\"80\" r=\"56\" color-interpolation=\"linearRGB\"><stop offset=\".82\" stop-color=\"#fff\" stop-opacity=\"0\"/><stop offset=\".875\" stop-color=\"#fff\" stop-opacity=\".28\"/><stop offset=\".91\" stop-color=\"#fff\" stop-opacity=\".11\"/><stop offset=\".96\" stop-color=\"#fff\" stop-opacity=\".035\"/><stop offset=\"1\" stop-color=\"#fff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"hddFairyOuterHalo\" gradientUnits=\"userSpaceOnUse\" cx=\"80\" cy=\"80\" r=\"79\" color-interpolation=\"linearRGB\"><stop offset=\".80\" stop-color=\"#fff\" stop-opacity=\"0\"/><stop offset=\".868\" stop-color=\"#fff\" stop-opacity=\".28\"/><stop offset=\".90\" stop-color=\"#fff\" stop-opacity=\".18\"/><stop offset=\".95\" stop-color=\"#fff\" stop-opacity=\".06\"/><stop offset=\"1\" stop-color=\"#fff\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"hddFairyCatchHalo\" gradientUnits=\"userSpaceOnUse\" cx=\"98\" cy=\"100.5\" r=\"18\" color-interpolation=\"linearRGB\"><stop offset=\".53\" stop-color=\"#f5f8fd\" stop-opacity=\"0\"/><stop offset=\".611\" stop-color=\"#f5f8fd\" stop-opacity=\".43\"/><stop offset=\".72\" stop-color=\"#f5f8fd\" stop-opacity=\".19\"/><stop offset=\".83\" stop-color=\"#f5f8fd\" stop-opacity=\".055\"/><stop offset=\"1\" stop-color=\"#f5f8fd\" stop-opacity=\"0\"/></radialGradient></defs><circle cx=\"80\" cy=\"80\" r=\"79\" fill=\"url(#hddFairyOuterHalo)\"/><circle cx=\"80\" cy=\"80\" r=\"68\" fill=\"none\" stroke=\"#dceaff\" stroke-width=\"1.8\"/><circle cx=\"80\" cy=\"80\" r=\"68\" fill=\"url(#hddFairyOuter)\" stroke=\"#f2fbff\" stroke-width=\"1.2\"/><g id=\"hddFairyCorners\" fill=\"#2b3388\" transform=\"rotate(0 80 80)\"><circle cx=\"80\" cy=\"80\" r=\"51.75\"/><rect x=\"37\" y=\"37\" width=\"86\" height=\"86\" rx=\"2\" transform=\"rotate(3 80 80)\"/></g><g id=\"hddFairySclera\" transform=\"translate(80 80) scale(1) translate(-80 -80)\"><circle cx=\"80\" cy=\"80\" r=\"48\" fill=\"#eef0f5\"/><circle cx=\"80\" cy=\"80\" r=\"56\" fill=\"url(#hddFairyScleraHalo)\"/><circle cx=\"80\" cy=\"80\" r=\"48\" fill=\"none\" stroke=\"#fff\" stroke-width=\".8\" stroke-opacity=\".16\"/></g><g id=\"hddFairyIrisOuter\" transform=\"translate(80 80) scale(1) translate(-80 -80)\"><circle cx=\"80\" cy=\"80\" r=\"33\" fill=\"#9daee0\"/></g><g id=\"hddFairyIrisBlue\" transform=\"translate(80 80) scale(1) translate(-80 -80)\"><circle cx=\"80\" cy=\"80\" r=\"24.15\" fill=\"#eef0f5\"/><circle cx=\"80\" cy=\"80\" r=\"23.5\" fill=\"#317bcf\"/></g><g id=\"hddFairyPupil\" transform=\"translate(80 80) scale(1) translate(-80 -80)\"><circle cx=\"80\" cy=\"80\" r=\"16.6\" fill=\"none\" stroke=\"#f5f8fd\" stroke-width=\".1\"/><circle cx=\"80\" cy=\"80\" r=\"16\" fill=\"#3b3d8a\"/></g><g id=\"hddFairyHighlight\" transform=\"translate(80 80) scale(1) translate(-80 -80)\"><circle cx=\"98\" cy=\"100.5\" r=\"18\" fill=\"url(#hddFairyCatchHalo)\"/><circle cx=\"98\" cy=\"100.5\" r=\"11\" fill=\"#f5f8fd\"/></g></svg>"</script>
+<script>
+const VECTOR = JSON.parse(document.getElementById('vector').textContent);
+const BANDS = 20;
+const SHIFTS = ["0","-12","6","-7","14","-4","9","-14","3","-9","11","-6","5","-11","8","-3","13","-8","4","-15"];
+
+function buildMascot(mount) {
+  const root = document.createElement('div');
+  root.setAttribute('data-hdd-mascot', 'true');
+  root.setAttribute('data-rail', 'false');
+  root.title = 'FAIRY Ⅲ';
+  const stage = document.createElement('div');
+  stage.setAttribute('data-hdd-mascot-stage', 'true');
+  const bloom = document.createElement('span');
+  bloom.setAttribute('data-hdd-mascot-bloom', 'true');
+  const mark = document.createElement('div');
+  mark.setAttribute('data-hdd-mascot-mark', 'true');
+  for (let index = 0; index < BANDS; index += 1) {
+    const top = (index * 100) / BANDS;
+    const bottom = ((BANDS - 1 - index) * 100) / BANDS;
+    const band = document.createElement('div');
+    band.setAttribute('data-hdd-mascot-band', 'true');
+    band.style.setProperty('--hdd-shift', SHIFTS[index % SHIFTS.length]);
+    band.style.clipPath = 'inset(' + top + '% 0 ' + bottom + '% 0)';
+    band.innerHTML = VECTOR;
+    mark.appendChild(band);
+  }
+  stage.appendChild(bloom);
+  stage.appendChild(mark);
+  root.appendChild(stage);
+  mount.appendChild(root);
+  return root;
+}
+
+const big = buildMascot(document.getElementById('big'));
+buildMascot(document.getElementById('small'));
+
+/* ---- the driver ----
+   The skin's tear is a CSS @keyframes that fires for about 86ms every 3.6s. That is
+   correct, and nearly invisible unless you happen to be watching at the right moment,
+   and it stops dead whenever the platform decides not to run animations (reduced
+   motion, a paused preview pane, a static thumbnail). This page therefore drives the
+   same motion from JavaScript: every frame it positions the twenty bands itself and
+   pulses the ring. Deterministic — pass ?t=1.2 in the URL to freeze it at that second,
+   which is also how the rendered thumbnails are taken. */
+const params = new URLSearchParams(location.search);
+const frozenAt = params.has('t') ? Number(params.get('t')) : null;
+const CYCLE = 3.6;
+const BURST_START = 3.42;
+const BURST_END = 3.54;
+
+function driveAt(seconds) {
+  const cycle = seconds % CYCLE;
+  const bursting = cycle >= BURST_START && cycle <= BURST_END;
+  const bands = document.querySelectorAll('[data-hdd-mascot-band]');
+  /* 1.8x the skin's offsets: the demo exists to show the effect, and at the skin's
+     true amplitude the tear reads as a flicker rather than as twenty bands stepping
+     apart. The shipped value stays in the CSS for reference. */
+  const GAIN = 1.8;
+  bands.forEach((band, index) => {
+    const raw = Number(SHIFTS[index % SHIFTS.length]);
+    const shift = bursting ? (raw * GAIN).toFixed(1) + 'px' : '0px';
+    band.style.transform = 'translateX(' + shift + ')';
+    band.style.filter = bursting ? 'brightness(1.4) saturate(1.4)' : '';
+  });
+  /* Ring: a slow pulse, visible even when you are not watching for the tear. */
+  const phase = (seconds % 3.4) / 3.4;
+  const ringScale = 1.08 + 0.34 * phase;
+  const ringOpacity = 0.55 * (1 - phase);
+  document.querySelectorAll('[data-hdd-mascot-stage]').forEach((stage) => {
+    stage.style.setProperty('--demo-ring-scale', ringScale.toFixed(3));
+    stage.style.setProperty('--demo-ring-opacity', ringOpacity.toFixed(3));
+  });
+  /* Idle breathing on the mark itself: always in motion, never distracting. */
+  const breathe = 1 + 0.012 * Math.sin((seconds / 3.4) * Math.PI * 2);
+  document.querySelectorAll('[data-hdd-mascot-mark]').forEach((mark) => {
+    mark.style.transform = 'scale(' + breathe.toFixed(4) + ')';
+  });
+}
+
+document.documentElement.classList.add('js-driver');
+if (frozenAt === null) {
+  const started = performance.now();
+  const loop = (now) => {
+    driveAt((now - started) / 1000);
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+} else {
+  driveAt(frozenAt);
+}
+
+let frozen = false;
+document.getElementById('shatter').addEventListener('click', () => {
+  document.querySelectorAll('[data-hdd-mascot-band]').forEach((band) => {
+    band.style.animation = 'none';
+    void band.offsetWidth;
+    band.style.animation = '';
+  });
+});
+
+document.getElementById('ring').addEventListener('click', () => {
+  frozen = !frozen;
+  document.querySelectorAll('[data-hdd-mascot-stage]').forEach((stage) => {
+    stage.style.setProperty('--demo-ring', frozen ? '0' : '1');
+    stage.classList.toggle('no-ring', frozen);
+  });
+});
+
+document.getElementById('slow').addEventListener('click', () => {
+  document.documentElement.classList.toggle('slow-demo');
+  document.documentElement.classList.remove('flicker-demo');
+});
+
+document.getElementById('flicker').addEventListener('click', () => {
+  document.documentElement.classList.toggle('flicker-demo');
+  document.documentElement.classList.remove('slow-demo');
+});
+
+/* Reduced motion: the skin honours the system switch and stops animating, which makes
+   a demo look broken. This page therefore forces the animations on from the start, and
+   the button switches back to following the system. */
+const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+let followSystem = false;
+function applyMotionMode() {
+  const force = !followSystem;
+  document.documentElement.classList.toggle('force-motion', force);
+  document.getElementById('motion-hint').classList.toggle('on', Boolean(reduced && reduced.matches) && followSystem);
+}
+applyMotionMode();
+
+document.getElementById('motion').addEventListener('click', () => {
+  followSystem = !followSystem;
+  applyMotionMode();
+  report();
+});
+
+/* A visible read-out: if the animation still does not run, this says why instead of
+   leaving it to guesswork — no animation, no size, or a browser that rejected rules. */
+function report() {
+  const band = document.querySelector('[data-hdd-mascot-band]');
+  const stage = document.querySelector('[data-hdd-mascot-stage]');
+  const bandStyle = band ? getComputedStyle(band) : null;
+  const stageRing = stage ? getComputedStyle(stage, '::before') : null;
+  const box = stage ? stage.getBoundingClientRect() : { width: 0, height: 0 };
+  const lines = [
+    'root force-motion : ' + document.documentElement.classList.contains('force-motion'),
+    'prefers-reduced   : ' + (reduced ? reduced.matches : 'n/a'),
+    'bands in DOM      : ' + document.querySelectorAll('[data-hdd-mascot-band]').length,
+    'stage size        : ' + Math.round(box.width) + ' x ' + Math.round(box.height) + ' px',
+    'band animation    : ' + (bandStyle ? bandStyle.animationName + ' ' + bandStyle.animationDuration + ' ' + bandStyle.animationTimingFunction : 'MISSING'),
+    'ring animation    : ' + (stageRing ? stageRing.animationName + ' ' + stageRing.animationDuration : 'n/a'),
+    'svg inserted      : ' + (document.querySelector('[data-hdd-mascot-band] svg') ? 'yes' : 'no'),
+  ];
+  /* \n here, not 
+: this whole block is inside a template literal, so a single
+     backslash-n would be turned into a real newline and land inside the page's string
+     literal, which is a syntax error that kills the entire page script. */
+  document.getElementById('diagnostics').textContent = lines.join('\n');
+}
+setTimeout(report, 60);
+window.addEventListener('error', (event) => {
+  document.getElementById('diagnostics').textContent += '\nJS ERROR: ' + event.message;
+});
+</script>
+<style>
+.no-ring::before { animation: none !important; opacity: 0 !important; }
+</style>
+</body>
+</html>

@@ -1,0 +1,50 @@
+/* Extracted from client.js: the mascot's animation, unchanged. */
+[data-hdd-mascot] {   flex: 1 1 100%; display: flex; justify-content: center; align-items: center;   position: relative; padding: 12px 0 26px; box-sizing: border-box;   overflow: visible !important;   transition: opacity 0.25s ease-out; }
+
+html[data-hdd-boot-active="true"] [data-hdd-mascot] {   opacity: 0 !important; }
+
+[data-hdd-mascot-stage] {   position: relative; flex: 0 0 auto !important;   width: min(260px, 100%); aspect-ratio: 1 / 1; height: auto;   max-width: 260px; }
+
+[data-hdd-mascot-bloom] {   position: absolute; inset: -14%; border-radius: 50%;   corner-shape: round;   background: radial-gradient(circle closest-side, rgba(150, 200, 255, 0.34) 0%, rgba(80, 150, 255, 0.22) 32%, rgba(56, 116, 255, 0.09) 55%, rgba(0, 0, 0, 0) 74%);   animation: hdd-mascot-bloom 3s ease-in-out infinite; }
+
+[data-hdd-mascot-stage]::before {   corner-shape: round;   border: 5px solid rgba(236, 246, 255, 0.7);   box-shadow: 0 0 16px rgba(198, 230, 255, 0.55), inset 0 0 14px rgba(198, 230, 255, 0.4);   filter: blur(3px);   opacity: 0;   animation: hdd-mascot-ripple 3.4s ease-out infinite; }
+
+[data-hdd-mascot-mark] { position: absolute; inset: 11%; }
+
+[data-hdd-mascot-band] {   position: absolute; inset: 0;   animation: hdd-mascot-slice 3.6s steps(1, end) infinite;   will-change: transform; }
+
+[data-hdd-mascot-band] svg { width: 100%; height: 100%; display: block; }
+
+@keyframes hdd-mascot-bloom {   0%, 100% { opacity: 0.7; transform: scale(1); }   50% { opacity: 1; transform: scale(1.06); } }
+
+@keyframes hdd-mascot-ripple {   0% { transform: scale(1.08); opacity: 0; }   18% { opacity: 0.9; }   66% { opacity: 0.3; }   100% { transform: scale(1.42); opacity: 0; } }
+
+@keyframes hdd-mascot-slice {   0%, 96% { transform: translateX(0); filter: none; }   96.2% { transform: translateX(var(--hdd-shift, 0px)); filter: brightness(1.35) saturate(1.35); }   97.4% { transform: translateX(calc(var(--hdd-shift, 0px) * -0.35)); filter: brightness(1.12); }   98.4%, 100% { transform: translateX(0); filter: none; } }
+
+[data-hdd-mark-scope] #hddFairyCorners {   transform-box: view-box; transform-origin: 80px 80px;   animation: hdd-mascot-turn 3s linear infinite; }
+
+[data-hdd-mark-scope] #hddFairySclera { animation-name: hdd-mascot-sclera; }
+
+[data-hdd-mark-scope] #hddFairyIrisOuter { animation-name: hdd-mascot-iris-outer; animation-delay: -47ms; }
+
+[data-hdd-mark-scope] #hddFairyIrisBlue { animation-name: hdd-mascot-iris-blue; animation-delay: -94ms; }
+
+[data-hdd-mark-scope] #hddFairyHighlight { animation-name: hdd-mascot-iris-blue; animation-delay: -94ms; }
+
+[data-hdd-mark-scope] #hddFairyPupil { animation-name: hdd-mascot-pupil; animation-delay: -188ms; }
+
+@keyframes hdd-mascot-turn { from { transform: rotate(0deg); } to { transform: rotate(90deg); } }
+
+@keyframes hdd-mascot-sclera { 0%, 100% { transform: scale(0.985); } 50% { transform: scale(0.91); } }
+
+@keyframes hdd-mascot-iris-outer { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.90); } }
+
+@keyframes hdd-mascot-iris-blue { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.87); } }
+
+@keyframes hdd-mascot-pupil { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.85); } }
+
+[data-hdd-mascot][data-rail="true"] [data-hdd-mascot-stage] {   width: min(112px, 100%); aspect-ratio: 1 / 1; height: auto; }
+
+[data-hdd-boot-bloom] {   position: absolute; inset: -14%; border-radius: 50%;   corner-shape: round;   background: radial-gradient(circle closest-side, rgba(150, 200, 255, 0.34) 0%, rgba(80, 150, 255, 0.22) 32%, rgba(56, 116, 255, 0.09) 55%, rgba(0, 0, 0, 0) 74%);   animation: hdd-mascot-bloom 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {   [data-hdd-mascot] [data-hdd-mascot-bloom],   [data-hdd-mascot] [data-hdd-mascot-stage]::before,   [data-hdd-mascot] [data-hdd-mascot-band],   [data-hdd-mark-scope] #hddFairyCorners { animation: none; }   [data-hdd-mark-scope] #hddFairySclera, [data-hdd-mark-scope] #hddFairyIrisOuter,   [data-hdd-mark-scope] #hddFairyIrisBlue, [data-hdd-mark-scope] #hddFairyPupil,   [data-hdd-mark-scope] #hddFairyHighlight { animation: none; } }
