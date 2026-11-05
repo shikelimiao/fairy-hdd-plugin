@@ -1,17 +1,17 @@
 {
   "name": "dsh-fairy-skin",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "type": "module",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js"
   },
   "files": [
-    "index.js",
     "client.js",
+    "index.js",
     "cordis.patch.yml",
-    "ref",
-    "design"
+    "design",
+    "assets"
   ],
   "dsh": {
     "bundle": {
@@ -27,7 +27,7 @@
       ]
     }
   },
-  "description": "Fairy 皮肤",
+  "description": "Fairy 皮肤：H.D.D. 界面 + 徽记 + 吉祥物 + 开屏动画（开屏资源已内置，首次运行自动释放）",
   "license": "MIT",
   "repository": {
     "type": "git",

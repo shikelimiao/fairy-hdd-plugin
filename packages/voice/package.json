@@ -1,6 +1,6 @@
 {
   "name": "dsh-fairy-voice",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "exports": {
     ".": "./index.js",
@@ -12,7 +12,8 @@
     "server.mjs",
     "cordis.patch.yml",
     "ref",
-    "scripts"
+    "scripts",
+    "bin"
   ],
   "dsh": {
     "bundle": {
@@ -27,7 +28,7 @@
       ]
     }
   },
-  "description": "Fairy 语音朗读（自包含：自动拉起 9890 配置服务与语音引擎，缺失时回退系统语音）",
+  "description": "Fairy 语音朗读：自包含本地服务 + 引擎自动启动；npx dsh-fairy-setup 一键安装 GPT-SoVITS",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -36,5 +37,8 @@
   },
   "engines": {
     "dsh": ">=0.2.0"
+  },
+  "bin": {
+    "dsh-fairy-setup": "./bin/fairy-setup.js"
   }
 }
