@@ -13,7 +13,7 @@ Zenless Zone Zero Fairy style skin, persona preset and resident voice plugin for
 2. 填入下面这个地址（jsDelivr CDN，国内可直连）：
 
 ```
-https://cdn.jsdelivr.net/gh/shikelimiao/fairy-hdd-plugin@main/index.json
+https://cdn.jsdelivr.net/gh/<你的账号>/fairy-hdd-plugin@main/index.json
 ```
 
 3. 在列表里选择 **Fairy 皮肤** / **Fairy 人设预设** / **Fairy 语音朗读** 逐个安装

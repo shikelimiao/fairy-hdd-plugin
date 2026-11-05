@@ -662,6 +662,11 @@ button[class*="_roundButton"]:hover {
       root.className = 'fs-splash';
       const video = document.createElement('video');
       video.src = SPLASH_VIDEO;
+      // npm/市场安装时开屏资源不在包内：向本机 9890 服务要真实地址，没有就退化为纯问候
+      fetch('http://127.0.0.1:9890/fairy.json', { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((cfg) => { if (cfg && cfg.splash) video.src = cfg.splash; })
+        .catch(() => {});
       video.autoplay = true;
       video.playsInline = true;
       root.appendChild(video);

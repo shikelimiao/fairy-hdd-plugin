@@ -1,13 +1,37 @@
 window.__ModuleLoader__.load({
-  id: '@local/dsh-fairy-voice',
+  id: 'dsh-fairy-voice',
   factory(require) {
     const React = require('react');
     const h = React.createElement;
 
-    const TTS_BASE = 'http://127.0.0.1:9880/tts';
-    const TTS_REF_AUDIO = '__FAIRY_ROOT__/voice/ref/fairy_ref.wav';
-    const TTS_PROMPT = '了解我会如同主人使唤我一般使唤它，并且让它不敢有怨言。';
+    // 运行时配置由 host 半边的 9890 服务提供（/fairy.json），这样 npm/市场安装也能拿到
+    // 本机的参考音频绝对路径，不用再靠安装器替换占位符。
+    const CONFIG_URL = 'http://127.0.0.1:9890/fairy.json';
+    const DEFAULT_TTS = 'http://127.0.0.1:9890/tts';
     const STORAGE_KEY = 'fairy.voice';
+
+    const runtime = {
+      ready: false,
+      ref: '',
+      prompt: '了解我会如同主人使唤我一般使唤它，并且让它不敢有怨言。',
+      tts: DEFAULT_TTS,
+    };
+
+    function loadRuntime() {
+      return fetch(CONFIG_URL, { cache: 'no-store' })
+        .then((res) => (res.ok ? res.json() : Promise.reject(new Error('config ' + res.status))))
+        .then((cfg) => {
+          if (cfg && cfg.refAudio) runtime.ref = cfg.refAudio;
+          if (cfg && cfg.prompt) runtime.prompt = cfg.prompt;
+          runtime.tts = DEFAULT_TTS;
+          runtime.ready = Boolean(runtime.ref);
+          return runtime;
+        })
+        .catch(() => {
+          runtime.ready = false;
+          return runtime;
+        });
+    }
 
     // ---- 语音层归一化 ----
     // 合成器读不出罗马数字（「Ⅲ」会被跳过、读成方块或乱码），送 TTS 前转成中文读法。
@@ -17,11 +41,8 @@ window.__ModuleLoader__.load({
 
     function normalizeForSpeech(text) {
       return String(text == null ? '' : text)
-        // Ⅰ…Ⅻ（U+2160–U+216B）
         .replace(/[\u2160-\u216B]/g, (ch) => ROMAN_READINGS[ch.charCodeAt(0) - 0x2160])
-        // ⅰ…ⅻ（U+2170–U+217B）
         .replace(/[\u2170-\u217B]/g, (ch) => ROMAN_READINGS[ch.charCodeAt(0) - 0x2170])
-        // ASCII 写法只在带「型/号/期/代」后缀时转换，避免动到变量名、版本号与代码
         .replace(/(?<![A-Za-z0-9_])([IVX]{1,6})(?=(?:型|号|期|代))/g, (token) => {
           const index = CANONICAL_ROMAN.indexOf(token);
           return index < 0 ? token : ROMAN_READINGS[index];
@@ -83,8 +104,17 @@ window.__ModuleLoader__.load({
         const audio = new Audio();
         let timer;
         let last = '';
+        let disposed = false;
+
+        loadRuntime();
+        // host 服务可能比页面晚几秒起来，失败就退避重试
+        const retry = setInterval(() => {
+          if (disposed || runtime.ready) { clearInterval(retry); return; }
+          loadRuntime();
+        }, 4000);
 
         const speak = (text) => {
+          if (!runtime.ready) return; // 没有参考音频就静默（host 还没起来或引擎缺失）
           const clean = normalizeForSpeech(text).replace(/\s+/g, ' ').trim();
           if (clean.length < 2 || clean === last) return;
           last = clean;
@@ -92,22 +122,21 @@ window.__ModuleLoader__.load({
           const query = new URLSearchParams({
             text: body,
             text_lang: 'zh',
-            ref_audio_path: TTS_REF_AUDIO,
-            prompt_text: TTS_PROMPT,
+            ref_audio_path: runtime.ref,
+            prompt_text: runtime.prompt,
             prompt_lang: 'zh',
             media_type: 'wav',
             streaming_mode: 'false',
             text_split_method: 'cut5',
             speed_factor: '1.0',
           });
-          audio.src = TTS_BASE + '?' + query.toString();
+          audio.src = runtime.tts + '?' + query.toString();
           audio.play().catch(() => { /* 需要用户手势时才允许播放 */ });
         };
 
         const scan = () => {
           const nodes = document.querySelectorAll('[class*="_markdown"], [class*="_mdBody"]');
           if (nodes.length === 0) return;
-          // 最后一个节点常常是空占位（光标 / 骨架），从后往前找第一个真有文字的
           let picked = '';
           for (let i = nodes.length - 1; i >= 0 && !picked; i -= 1) {
             const value = String(nodes[i].textContent || '').trim();
@@ -122,6 +151,8 @@ window.__ModuleLoader__.load({
         });
         observer.observe(document.body, { childList: true, subtree: true, characterData: true });
         return () => {
+          disposed = true;
+          clearInterval(retry);
           observer.disconnect();
           clearTimeout(timer);
           audio.pause();
