@@ -98,7 +98,7 @@
                                              "source":  {
                                                             "type":  "git",
                                                             "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "068b4fea009d3421544e2bc3ca31d2cdca2a6465",
+                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
                                                             "path":  "packages/skin"
                                                         },
                                              "engines":  {
@@ -142,7 +142,7 @@
                                              "source":  {
                                                             "type":  "git",
                                                             "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "068b4fea009d3421544e2bc3ca31d2cdca2a6465",
+                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
                                                             "path":  "packages/preset"
                                                         },
                                              "engines":  {
@@ -187,7 +187,7 @@
                                              "source":  {
                                                             "type":  "git",
                                                             "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "068b4fea009d3421544e2bc3ca31d2cdca2a6465",
+                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
                                                             "path":  "packages/voice"
                                                         },
                                              "engines":  {
