@@ -1,7 +1,6 @@
 {
-  "name": "@local/dsh-fairy-skin",
-  "version": "3.0.0-full",
-  "private": true,
+  "name": "dsh-fairy-skin",
+  "version": "3.0.0",
   "type": "module",
   "exports": {
     ".": "./index.js",
@@ -10,7 +9,9 @@
   "files": [
     "index.js",
     "client.js",
-    "cordis.patch.yml"
+    "cordis.patch.yml",
+    "ref",
+    "design"
   ],
   "dsh": {
     "bundle": {
@@ -25,5 +26,15 @@
         "@deepseek-ai/dsh-client-ui-conversation"
       ]
     }
+  },
+  "description": "Fairy 皮肤",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikelimiao/fairy-hdd-plugin.git",
+    "directory": "packages/skin"
+  },
+  "engines": {
+    "dsh": "^0.2.2-rc.1"
   }
 }

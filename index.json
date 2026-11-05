@@ -1,200 +1,185 @@
 {
-    "format":  1,
-    "title":  {
-                  "zh":  "Fairy H.D.D. 插件集",
-                  "en":  "Fairy H.D.D. Plugins"
-              },
-    "description":  {
-                        "zh":  "绝区零 Fairy 风格的 DSH 皮肤、人设预设与常驻语音插件。",
-                        "en":  "Zenless Zone Zero Fairy style skin, persona preset and resident voice plugin for DSH."
-                    },
-    "metadata":  {
-                     "categories":  {
-                                        "appearance":  {
-                                                           "title":  {
-                                                                         "zh":  "外观",
-                                                                         "en":  "Appearance"
-                                                                     }
-                                                       },
-                                        "persona":  {
-                                                        "title":  {
-                                                                      "zh":  "人设",
-                                                                      "en":  "Persona"
-                                                                  }
-                                                    },
-                                        "voice":  {
-                                                      "title":  {
-                                                                    "zh":  "语音",
-                                                                    "en":  "Voice"
-                                                                }
-                                                  }
-                                    },
-                     "labels":  {
-                                    "windows":  {
-                                                    "title":  {
-                                                                  "zh":  "Windows",
-                                                                  "en":  "Windows"
-                                                              }
-                                                },
-                                    "zh":  {
-                                               "title":  {
-                                                             "zh":  "中文",
-                                                             "en":  "Chinese"
-                                                         }
-                                           },
-                                    "experimental":  {
-                                                         "title":  {
-                                                                       "zh":  "实验性",
-                                                                       "en":  "Experimental"
-                                                                   }
-                                                     }
-                                },
-                     "sortKeys":  {
-                                      "published":  {
-                                                        "title":  {
-                                                                      "zh":  "发布时间",
-                                                                      "en":  "Published"
-                                                                  },
-                                                        "order":  "desc"
-                                                    }
-                                  }
-                 },
-    "plugins":  [
-                    {
-                        "name":  "@local/dsh-fairy-skin",
-                        "title":  {
-                                      "zh":  "Fairy 皮肤",
-                                      "en":  "Fairy Skin"
-                                  },
-                        "description":  {
-                                            "zh":  "H.D.D. 深色界面、Fairy 徽记、吉祥物、开屏动画与余额胶囊。",
-                                            "en":  "H.D.D. dark UI, Fairy sigil, mascot, boot splash and balance pill."
-                                        },
-                        "author":  "Fairy H.D.D.",
-                        "homepage":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                        "repository":  {
-                                           "url":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                                           "directory":  "packages/skin"
-                                       },
-                        "icon":  "assets/design/fairy-assets/fairy-mascot.svg",
-                        "metadata":  {
-                                         "category":  "appearance",
-                                         "keywords":  [
-                                                          "skin",
-                                                          "theme",
-                                                          "zzz",
-                                                          "fairy",
-                                                          "splash"
-                                                      ],
-                                         "labels":  [
-                                                        "windows",
-                                                        "zh"
-                                                    ]
-                                     },
-                        "versions":  [
-                                         {
-                                             "version":  "3.0.0-full",
-                                             "publishTimestamp":  1793852128,
-                                             "source":  {
-                                                            "type":  "git",
-                                                            "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
-                                                            "path":  "packages/skin"
-                                                        },
-                                             "engines":  {
-                                                             "dsh":  "^0.2.2-rc.1"
-                                                         }
-                                         }
-                                     ]
-                    },
-                    {
-                        "name":  "@local/dsh-fairy-preset",
-                        "title":  {
-                                      "zh":  "Fairy 人设预设",
-                                      "en":  "Fairy Persona Preset"
-                                  },
-                        "description":  {
-                                            "zh":  "「Fairy 模式」预设：冷面毒舌的 Ⅲ 型 AI，含完整人设与工具清单。",
-                                            "en":  "The Fairy Mode preset: a deadpan type-III AI with a full persona and tool set."
-                                        },
-                        "author":  "Fairy H.D.D.",
-                        "homepage":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                        "repository":  {
-                                           "url":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                                           "directory":  "packages/preset"
-                                       },
-                        "metadata":  {
-                                         "category":  "persona",
-                                         "keywords":  [
-                                                          "preset",
-                                                          "persona",
-                                                          "fairy"
-                                                      ],
-                                         "labels":  [
-                                                        "windows",
-                                                        "zh"
-                                                    ]
-                                     },
-                        "versions":  [
-                                         {
-                                             "version":  "2.0.1",
-                                             "publishTimestamp":  1793852128,
-                                             "source":  {
-                                                            "type":  "git",
-                                                            "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
-                                                            "path":  "packages/preset"
-                                                        },
-                                             "engines":  {
-                                                             "dsh":  "^0.2.2-rc.1"
-                                                         }
-                                         }
-                                     ]
-                    },
-                    {
-                        "name":  "@local/dsh-fairy-voice",
-                        "title":  {
-                                      "zh":  "Fairy 语音朗读",
-                                      "en":  "Fairy Voice"
-                                  },
-                        "description":  {
-                                            "zh":  "常驻语音插件：每条回复用 Fairy 音色朗读，输入栏可一键开关。",
-                                            "en":  "Resident voice plugin: reads every reply with the Fairy voice, toggle in the composer."
-                                        },
-                        "author":  "Fairy H.D.D.",
-                        "homepage":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                        "repository":  {
-                                           "url":  "https://github.com/YOUR_GITHUB_USER/fairy-hdd-plugin",
-                                           "directory":  "packages/voice"
-                                       },
-                        "metadata":  {
-                                         "category":  "voice",
-                                         "keywords":  [
-                                                          "tts",
-                                                          "voice",
-                                                          "gpt-sovits",
-                                                          "fairy"
-                                                      ],
-                                         "labels":  [
-                                                        "windows",
-                                                        "zh"
-                                                    ]
-                                     },
-                        "versions":  [
-                                         {
-                                             "version":  "1.0.0",
-                                             "publishTimestamp":  1793852128,
-                                             "source":  {
-                                                            "type":  "git",
-                                                            "url":  "https://github.com/shikelimiao/fairy-hdd-plugin",
-                                                            "commit":  "9dd61db25630522ff8ce5f36b4231ecd009d2437",
-                                                            "path":  "packages/voice"
-                                                        },
-                                             "engines":  {
-                                                             "dsh":  "\u003e=0.2.0"
-                                                         }
-                                         }
-                                     ]
-                    }
-                ]
+  "format": 1,
+  "title": {
+    "zh": "Fairy H.D.D. 插件集",
+    "en": "Fairy H.D.D. Plugins"
+  },
+  "description": {
+    "zh": "绝区零 Fairy 风格的 DSH 皮肤、人设预设与常驻语音插件。国内可直接安装（npm 镜像）。",
+    "en": "Zenless Zone Zero Fairy style skin, persona preset and resident voice plugin for DSH."
+  },
+  "metadata": {
+    "categories": {
+      "appearance": {
+        "title": {
+          "zh": "外观",
+          "en": "Appearance"
+        }
+      },
+      "persona": {
+        "title": {
+          "zh": "人设",
+          "en": "Persona"
+        }
+      },
+      "voice": {
+        "title": {
+          "zh": "语音",
+          "en": "Voice"
+        }
+      }
+    },
+    "labels": {
+      "windows": {
+        "title": {
+          "zh": "Windows",
+          "en": "Windows"
+        }
+      },
+      "zh": {
+        "title": {
+          "zh": "中文",
+          "en": "Chinese"
+        }
+      }
+    },
+    "sortKeys": {
+      "published": {
+        "title": {
+          "zh": "发布时间",
+          "en": "Published"
+        },
+        "order": "desc"
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "dsh-fairy-skin",
+      "title": {
+        "zh": "Fairy 皮肤",
+        "en": "Fairy Skin"
+      },
+      "description": {
+        "zh": "H.D.D. 深色界面、Fairy 徽记、吉祥物、开屏动画与余额胶囊。",
+        "en": "H.D.D. dark UI, Fairy sigil, mascot, boot splash and balance pill."
+      },
+      "author": "shikelimiao",
+      "homepage": "https://github.com/shikelimiao/fairy-hdd-plugin",
+      "repository": {
+        "url": "https://github.com/shikelimiao/fairy-hdd-plugin",
+        "directory": "packages/skin"
+      },
+      "icon": "assets/design/fairy-assets/fairy-mascot.svg",
+      "metadata": {
+        "category": "appearance",
+        "keywords": [
+          "skin",
+          "theme",
+          "zzz",
+          "fairy",
+          "splash"
+        ],
+        "labels": [
+          "windows",
+          "zh"
+        ]
+      },
+      "versions": [
+        {
+          "version": "3.0.0",
+          "publishTimestamp": 1793853772,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": "^0.2.2-rc.1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dsh-fairy-preset",
+      "title": {
+        "zh": "Fairy 人设预设",
+        "en": "Fairy Persona Preset"
+      },
+      "description": {
+        "zh": "「Fairy 模式」预设：冷面毒舌的 Ⅲ 型 AI，含完整人设与工具清单。",
+        "en": "The Fairy Mode preset: a deadpan type-III AI with a full persona and tool set."
+      },
+      "author": "shikelimiao",
+      "homepage": "https://github.com/shikelimiao/fairy-hdd-plugin",
+      "repository": {
+        "url": "https://github.com/shikelimiao/fairy-hdd-plugin",
+        "directory": "packages/preset"
+      },
+      "metadata": {
+        "category": "persona",
+        "keywords": [
+          "preset",
+          "persona",
+          "fairy"
+        ],
+        "labels": [
+          "windows",
+          "zh"
+        ]
+      },
+      "versions": [
+        {
+          "version": "2.0.1",
+          "publishTimestamp": 1793853772,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": "^0.2.2-rc.1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dsh-fairy-voice",
+      "title": {
+        "zh": "Fairy 语音朗读",
+        "en": "Fairy Voice"
+      },
+      "description": {
+        "zh": "常驻语音插件：每条回复用 Fairy 音色朗读，输入栏可一键开关。",
+        "en": "Resident voice plugin: reads every reply with the Fairy voice, toggle in the composer."
+      },
+      "author": "shikelimiao",
+      "homepage": "https://github.com/shikelimiao/fairy-hdd-plugin",
+      "repository": {
+        "url": "https://github.com/shikelimiao/fairy-hdd-plugin",
+        "directory": "packages/voice"
+      },
+      "metadata": {
+        "category": "voice",
+        "keywords": [
+          "tts",
+          "voice",
+          "gpt-sovits",
+          "fairy"
+        ],
+        "labels": [
+          "windows",
+          "zh"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793853772,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.0"
+          }
+        }
+      ]
+    }
+  ]
 }

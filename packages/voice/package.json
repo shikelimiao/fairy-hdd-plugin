@@ -1,7 +1,6 @@
 {
-  "name": "@local/dsh-fairy-voice",
+  "name": "dsh-fairy-voice",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
   "exports": {
     ".": "./index.js",
@@ -10,7 +9,8 @@
   "files": [
     "index.js",
     "client.js",
-    "cordis.patch.yml"
+    "cordis.patch.yml",
+    "ref"
   ],
   "dsh": {
     "bundle": {
@@ -24,5 +24,15 @@
         "@deepseek-ai/dsh-client-ui-conversation"
       ]
     }
+  },
+  "description": "Fairy 语音朗读",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikelimiao/fairy-hdd-plugin.git",
+    "directory": "packages/voice"
+  },
+  "engines": {
+    "dsh": ">=0.2.0"
   }
 }

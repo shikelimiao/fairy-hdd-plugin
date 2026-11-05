@@ -1,7 +1,25 @@
 {
-  "name": "@local/dsh-fairy-preset",
+  "name": "dsh-fairy-preset",
   "version": "2.0.1",
-  "private": true,
   "type": "module",
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "description": "Fairy 人设预设",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikelimiao/fairy-hdd-plugin.git",
+    "directory": "packages/preset"
+  },
+  "engines": {
+    "dsh": "^0.2.2-rc.1"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml"
+  ]
 }
