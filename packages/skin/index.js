@@ -27,6 +27,11 @@ const copyIfMissing = (from, to) => {
 };
 
 export function apply() {
+  // 71 MB 的拷贝放到下一轮事件循环，避免首次启动阻塞宿主
+  setTimeout(() => { try { seed(); } catch { /* ignore */ } }, 800);
+}
+
+function seed() {
   try {
     if (!fs.existsSync(ASSETS)) return;
     fs.mkdirSync(path.join(DATA, 'cache'), { recursive: true });

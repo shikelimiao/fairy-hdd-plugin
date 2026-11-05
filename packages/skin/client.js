@@ -829,36 +829,6 @@ button[class*="_roundButton"]:hover {
     }
 
     /* the dockit file cards hardcode a light surface; repaint them inline so no specificity fight */
-    function repaintLightSurfaces() {
-      document.querySelectorAll('*').forEach((el) => {
-        const bg = getComputedStyle(el).backgroundColor;
-        const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (!m) return;
-        const [r, g, b] = [+m[1], +m[2], +m[3]];
-        if (r < 215 || g < 215 || b < 215) return;
-        if (el.clientWidth < 200 || el.clientHeight < 24) return;
-        el.style.setProperty('background', '#0a1526', 'important');
-        el.style.setProperty('background-color', '#0a1526', 'important');
-        el.style.setProperty('background-image', 'none', 'important');
-        el.style.setProperty('border-color', 'rgba(98, 140, 220, 0.16)', 'important');
-        el.style.setProperty('box-shadow', 'none', 'important');
-      });
-    }
-    function watchLightSurfaces() {
-      let timer;
-      const run = () => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { try { repaintLightSurfaces(); } catch (error) { /* ignore */ } }, 350);
-      };
-      run();
-      const observer = new MutationObserver(run);
-      observer.observe(document.body, { childList: true, subtree: true });
-      const until = Date.now() + 120000;
-      const tick = setInterval(() => {
-        run();
-        if (Date.now() > until) { clearInterval(tick); observer.disconnect(); }
-      }, 900);
-    }
     let domProbe = '';
     const domListeners = new Set();
     function setDomProbe(text) { domProbe = text; domListeners.forEach((fn) => fn()); }
@@ -958,7 +928,7 @@ button[class*="_roundButton"]:hover {
         window.setTimeout(() => {
           try { runSplash(); } catch (error) { console.error('[fairy] splash failed', error); }
         }, 400);
-        window.setTimeout(() => { try { watchLightSurfaces(); } catch (error) { /* ignore */ } }, 1500);
+        
 
 
         ctx.effect(() => {
