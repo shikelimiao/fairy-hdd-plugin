@@ -83,10 +83,29 @@ const writeState = () => {
   }
 };
 
+const configAlive = async (port) => {
+  try {
+    const res = await fetch(`http://127.0.0.1:${port}/fairy.json`, { signal: AbortSignal.timeout(900) });
+    return res.ok;
+  } catch {
+    return false;
+  }
+};
+
 const ensureServer = async () => {
-  if (await portOpen(9890)) return;
+  // 已有本服务的实例在跑就直接用
+  if (await configAlive(9890)) return;
+  // 端口被别的程序占用（例如旧版部署包的素材服务）：换到 9891
+  const port = (await portOpen(9890)) ? 9891 : 9890;
   launch(process.execPath, [SERVER], {
-    env: { ...process.env, FAIRY_DATA: DATA, FAIRY_REF: REF, FAIRY_PROMPT: PROMPT, ELECTRON_RUN_AS_NODE: '1' },
+    env: {
+      ...process.env,
+      FAIRY_DATA: DATA,
+      FAIRY_REF: REF,
+      FAIRY_PROMPT: PROMPT,
+      FAIRY_PORT: String(port),
+      ELECTRON_RUN_AS_NODE: '1',
+    },
   });
 };
 

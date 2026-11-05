@@ -88,7 +88,7 @@
       "versions": [
         {
           "version": "3.0.6",
-          "publishTimestamp": 1793882036,
+          "publishTimestamp": 1793882260,
           "source": {
             "type": "npm"
           },
@@ -129,7 +129,7 @@
       "versions": [
         {
           "version": "2.0.1",
-          "publishTimestamp": 1793882036,
+          "publishTimestamp": 1793882260,
           "source": {
             "type": "npm"
           },
@@ -170,8 +170,8 @@
       },
       "versions": [
         {
-          "version": "1.0.4",
-          "publishTimestamp": 1793882036,
+          "version": "1.0.5",
+          "publishTimestamp": 1793882260,
           "source": {
             "type": "npm"
           },

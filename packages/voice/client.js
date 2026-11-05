@@ -6,7 +6,7 @@ window.__ModuleLoader__.load({
 
     // 运行时配置由 host 半边的 9890 服务提供（/fairy.json），这样 npm/市场安装也能拿到
     // 本机的参考音频绝对路径，不用再靠安装器替换占位符。
-    const CONFIG_URL = 'http://127.0.0.1:9890/fairy.json';
+    const CONFIG_PORTS = [9890, 9891];
     const DEFAULT_TTS = 'http://127.0.0.1:9890/tts';
     const STORAGE_KEY = 'fairy.voice';
 
@@ -17,20 +17,24 @@ window.__ModuleLoader__.load({
       tts: DEFAULT_TTS,
     };
 
-    function loadRuntime() {
-      return fetch(CONFIG_URL, { cache: 'no-store' })
-        .then((res) => (res.ok ? res.json() : Promise.reject(new Error('config ' + res.status))))
-        .then((cfg) => {
-          if (cfg && cfg.refAudio) runtime.ref = cfg.refAudio;
-          if (cfg && cfg.prompt) runtime.prompt = cfg.prompt;
-          runtime.tts = DEFAULT_TTS;
-          runtime.ready = Boolean(runtime.ref);
+    async function loadRuntime() {
+      runtime.ready = false;
+      for (const port of CONFIG_PORTS) {
+        try {
+          const res = await fetch(`http://127.0.0.1:${port}/fairy.json`, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const cfg = await res.json();
+          if (!cfg || !cfg.refAudio) continue;
+          runtime.ref = cfg.refAudio;
+          runtime.prompt = cfg.prompt || runtime.prompt;
+          runtime.tts = `http://127.0.0.1:${port}/tts`;
+          runtime.ready = true;
           return runtime;
-        })
-        .catch(() => {
-          runtime.ready = false;
-          return runtime;
-        });
+        } catch {
+          /* try the next port */
+        }
+      }
+      return runtime;
     }
 
     // ---- 语音层归一化 ----

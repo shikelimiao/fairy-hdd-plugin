@@ -1,6 +1,6 @@
 {
   "name": "dsh-fairy-voice",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "exports": {
     ".": "./index.js",
